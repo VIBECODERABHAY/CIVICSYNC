@@ -1,0 +1,73 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./App.{js,jsx,ts,tsx}", "./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        "tertiary": "#012100",
+        "on-tertiary": "#ffffff",
+        "primary-fixed": "#e0e0ff",
+        "on-tertiary-container": "#41ad31",
+        "error-container": "#ffdad6",
+        "on-tertiary-fixed-variant": "#035300",
+        "on-primary-fixed": "#000767",
+        "on-secondary-fixed": "#2e1500",
+        "surface-bright": "#f9f9f9",
+        "tertiary-container": "#023900",
+        "surface-variant": "#e2e2e2",
+        "surface-container": "#eeeeee",
+        "inverse-primary": "#bdc2ff",
+        "primary-fixed-dim": "#bdc2ff",
+        "background": "#f9f9f9",
+        "surface-container-lowest": "#ffffff",
+        "outline-variant": "#c6c5d4",
+        "on-surface": "#1a1c1c",
+        "on-primary-container": "#8690ee",
+        "secondary": "#8f4e00",
+        "secondary-fixed": "#ffdcc2",
+        "primary-container": "#1a237e",
+        "inverse-surface": "#2f3131",
+        "inverse-on-surface": "#f1f1f1",
+        "surface-dim": "#dadada",
+        "outline": "#767683",
+        "tertiary-fixed-dim": "#72de5c",
+        "on-primary-fixed-variant": "#343d96",
+        "error": "#ba1a1a",
+        "secondary-fixed-dim": "#ffb77a",
+        "on-background": "#1a1c1c",
+        "surface-container-highest": "#e2e2e2",
+        "surface-container-high": "#e8e8e8",
+        "surface-container-low": "#f3f3f3",
+        "on-secondary-fixed-variant": "#6d3a00",
+        "tertiary-fixed": "#8dfc75",
+        "surface": "#f9f9f9",
+        "on-surface-variant": "#454652",
+        "on-error": "#ffffff",
+        "primary": "#000666",
+        "surface-tint": "#4c56af",
+        "on-tertiary-fixed": "#012200",
+        "on-secondary": "#ffffff",
+        "secondary-container": "#fe9832",
+        "on-primary": "#ffffff",
+        "on-secondary-container": "#683700",
+        "on-error-container": "#93000a"
+      },
+      borderRadius: {
+        "DEFAULT": 2,
+        "lg": 4,
+        "xl": 8,
+        "full": 9999
+      },
+      spacing: {
+        "gutter": 16,
+        "margin-desktop": 24,
+        "stack-sm": 8,
+        "margin-mobile": 16,
+        "base": 8,
+        "stack-md": 16,
+        "stack-lg": 32
+      }
+    }
+  },
+  plugins: [],
+}
