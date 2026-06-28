@@ -112,14 +112,55 @@ function OfficialTabs() {
   );
 }
 
+import * as SecureStore from 'expo-secure-store';
+
 export default function App() {
   const [user, setUser] = useState(null);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
+
+  React.useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const savedUser = await SecureStore.getItemAsync('user');
+        if (savedUser) {
+          setUser(JSON.parse(savedUser));
+        }
+      } catch (e) {
+        console.error("Failed to load auth state", e);
+      } finally {
+        setIsAuthLoading(false);
+      }
+    };
+    loadUser();
+  }, []);
 
   const authContextValue = {
     user,
-    login: (userData) => setUser(userData),
-    logout: () => setUser(null)
+    login: async (userData) => {
+      try {
+        setUser(userData);
+        await SecureStore.setItemAsync('user', JSON.stringify(userData));
+      } catch(e) {
+        console.error("Failed to save auth state", e);
+      }
+    },
+    logout: async () => {
+      try {
+        setUser(null);
+        await SecureStore.deleteItemAsync('user');
+      } catch(e) {
+        console.error("Failed to clear auth state", e);
+      }
+    }
   };
+
+  if (isAuthLoading) {
+    return (
+      <View style={{flex: 1, backgroundColor: Theme.colors.background, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{color: Theme.colors.primary, fontSize: 18, fontWeight: 'bold'}}>CivicSync</Text>
+      </View>
+    );
+  }
 
   return (
     <SafeAreaProvider>

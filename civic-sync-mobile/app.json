@@ -37,6 +37,12 @@
       "eas": {
         "projectId": "822f6dcb-b8ad-4bed-bdf3-7a592590e63c"
       }
-    }
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-camera",
+      "expo-location",
+      "expo-image-picker"
+    ]
   }
 }

@@ -122,18 +122,17 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
               <Button 
                 size="lg" 
-                onClick={() => navigate("/download")}
-                className="bg-primary hover:bg-primary/90 text-white transition-smooth hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+                onClick={() => window.open("/CIVICSYNC.apk", "_blank")}
+                className="bg-green-600 hover:bg-green-700 text-white transition-smooth hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
               >
-                View Full PRD <ArrowRight className="ml-2 w-4 h-4" />
+                Download for Android (APK)
               </Button>
               <Button 
                 size="lg" 
-                onClick={() => navigate("/support")}
                 variant="outline" 
-                className="transition-smooth hover:bg-primary/5 hover:scale-105 active:scale-95"
+                className="transition-smooth cursor-not-allowed border-gray-300 text-gray-500 hover:bg-transparent"
               >
-                Learn More
+                iOS App (Coming Soon)
               </Button>
             </div>
           </div>

@@ -7,8 +7,8 @@ import { Ionicons } from '@expo/vector-icons';
 export default function ProfileScreen() {
     const { user, logout } = useContext(AuthContext);
     
-    // Determine if user is official based on agency_id presence
-    const isOfficial = !!user?.agency_id;
+    // Determine if user is official based on role
+    const isOfficial = user?.role === 'official';
 
     // Citizen logic
     const pointsPerComplaint = 50;
@@ -30,7 +30,7 @@ export default function ProfileScreen() {
                     
                     {isOfficial ? (
                         <Text style={[styles.kycTag, { backgroundColor: '#e3f2fd', color: '#1565c0' }]}>
-                            <Ionicons name="business" size={12} color="#1565c0" /> Agency ID: {user?.agency_id}
+                            <Ionicons name="business" size={12} color="#1565c0" /> {user?.agency_id ? `Agency ID: ${user.agency_id}` : 'Authority Verified'}
                         </Text>
                     ) : (
                         user?.aadhaar_no && (
