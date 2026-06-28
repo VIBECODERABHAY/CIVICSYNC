@@ -55,66 +55,60 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
-      {/* Navigation - Minimalist */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-xl border-b border-border/30 transition-smooth">
+      {/* Navigation - Inverted Minimalist */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-xl border-b border-white/10 transition-smooth">
         <div className="container flex items-center justify-between h-14">
           <div className="flex items-center gap-2">
             <img 
               src="/manus-storage/civicsync-logo_9f28ea54.png" 
               alt="CivicSync" 
-              className="w-6 h-6 transition-smooth hover:scale-110"
+              className="w-6 h-6 transition-smooth hover:scale-110 brightness-0 invert"
             />
-            <span className="font-bold text-sm text-foreground">CivicSync</span>
+            <span className="font-bold text-sm text-white">CivicSync</span>
           </div>
           <div className="hidden md:flex items-center gap-6">
-            <button onClick={() => navigate("/download")} className="text-xs text-muted-foreground hover:text-primary transition-smooth">Download</button>
-            <button onClick={() => navigate("/initiatives")} className="text-xs text-muted-foreground hover:text-primary transition-smooth">Initiatives</button>
-            <button onClick={() => navigate("/guide")} className="text-xs text-muted-foreground hover:text-primary transition-smooth">Guide</button>
-            <button onClick={() => navigate("/support")} className="text-xs text-muted-foreground hover:text-primary transition-smooth">Support</button>
-            <button onClick={() => navigate("/official-portal")} className="text-xs font-semibold text-slate-800 hover:text-primary transition-smooth">Official Portal</button>
+            <button onClick={() => navigate("/download")} className="text-xs text-zinc-400 hover:text-white transition-smooth">Download</button>
+            <button onClick={() => navigate("/initiatives")} className="text-xs text-zinc-400 hover:text-white transition-smooth">Initiatives</button>
+            <button onClick={() => navigate("/guide")} className="text-xs text-zinc-400 hover:text-white transition-smooth">Guide</button>
+            <button onClick={() => navigate("/support")} className="text-xs text-zinc-400 hover:text-white transition-smooth">Support</button>
+            <button onClick={() => navigate("/official-portal")} className="text-xs font-semibold text-zinc-300 hover:text-white transition-smooth">Official Portal</button>
           </div>
           <Button 
             size="sm" 
             onClick={() => navigate("/download")}
-            className="bg-primary hover:bg-primary/90 text-white transition-smooth hover:scale-105 active:scale-95"
+            className="bg-primary hover:bg-primary/90 text-white transition-smooth hover:scale-105 active:scale-95 shadow-lg shadow-primary/20"
           >
             Download PRD
           </Button>
         </div>
       </nav>
 
-      {/* Hero Section - Minimalist with Morphic Background */}
+      {/* Hero Section - Inverted Minimalist */}
       <section 
-        className="relative pt-32 pb-24 md:pt-48 md:pb-40 overflow-hidden"
-        style={{
-          backgroundImage: "url('/hero-bg.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
-        }}
+        className="relative pt-32 pb-24 md:pt-48 md:pb-40 overflow-hidden bg-zinc-950"
       >
         {/* Morphic Gradient Overlay */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl animate-morph opacity-70" />
-          <div className="absolute bottom-10 right-10 w-72 h-72 bg-accent/10 rounded-full mix-blend-multiply filter blur-3xl animate-morph opacity-70" style={{ animationDelay: "2s" }} />
+          <div className="absolute top-10 left-10 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-3xl animate-morph opacity-50" />
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-screen filter blur-3xl animate-morph opacity-50" style={{ animationDelay: "2s" }} />
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-white/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-zinc-950" />
         
         <div className="container relative z-10">
           <div className="max-w-2xl">
             {/* Badge */}
-            <div className="inline-block mb-6 px-3 py-1.5 bg-primary/15 rounded-full border border-primary/30 backdrop-blur-sm transition-smooth hover:bg-primary/20 hover:scale-105 cursor-default">
-              <span className="text-xs font-semibold text-primary tracking-wide">CIVIC ENGAGEMENT PLATFORM</span>
+            <div className="inline-block mb-6 px-3 py-1.5 bg-white/5 rounded-full border border-white/10 backdrop-blur-sm transition-smooth hover:bg-white/10 hover:scale-105 cursor-default">
+              <span className="text-xs font-semibold text-white tracking-wide">CIVIC ENGAGEMENT PLATFORM</span>
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-6xl md:text-7xl font-bold text-foreground mb-8 leading-tight tracking-tight animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+            <h1 className="text-6xl md:text-7xl font-bold text-white mb-8 leading-tight tracking-tight animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
               Your Voice, Your City
             </h1>
 
             {/* Subheading */}
-            <p className="text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed max-w-xl animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            <p className="text-lg md:text-xl text-zinc-400 mb-10 leading-relaxed max-w-xl animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
               Bridge the gap between citizens and local governance. Report issues, engage in decisions, earn recognition.
             </p>
 
@@ -123,14 +117,14 @@ export default function Home() {
               <Button 
                 size="lg" 
                 onClick={() => window.open("/CIVICSYNC.apk", "_blank")}
-                className="bg-green-600 hover:bg-green-700 text-white transition-smooth hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+                className="bg-primary hover:bg-primary/90 text-white transition-smooth hover:scale-105 active:scale-95 shadow-lg shadow-primary/20"
               >
                 Download for Android (APK)
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="transition-smooth cursor-not-allowed border-gray-300 text-gray-500 hover:bg-transparent"
+                className="transition-smooth cursor-not-allowed border-white/20 text-zinc-400 hover:bg-white/5 hover:text-white bg-transparent"
               >
                 iOS App (Coming Soon)
               </Button>
@@ -140,14 +134,14 @@ export default function Home() {
       </section>
 
       {/* Morphic Divider */}
-      <div className="relative h-24 md:h-32 bg-white overflow-hidden">
+      <div className="relative h-24 md:h-32 bg-background overflow-hidden">
         <svg 
-          className="absolute bottom-0 left-0 w-full h-full text-background"
+          className="absolute top-0 left-0 w-full h-full text-zinc-950"
           viewBox="0 0 1200 120" 
           preserveAspectRatio="none"
         >
           <path 
-            d="M0,40 Q300,10 600,40 T1200,40 L1200,120 L0,120 Z" 
+            d="M0,0 Q600,120 1200,0 L1200,0 L0,0 Z" 
             fill="currentColor"
           />
         </svg>
