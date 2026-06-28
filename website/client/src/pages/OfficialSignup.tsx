@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 
 export default function OfficialSignup() {
   const [, setLocation] = useLocation();
+  const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,8 +19,10 @@ export default function OfficialSignup() {
     e.preventDefault();
     setLoading(true);
 
+    const endpoint = isLogin ? "/api/auth/official/login" : "/api/auth/official/register";
+
     try {
-      const res = await fetch("https://8c49-2401-4900-883f-b678-ddde-4fd9-f965-210f.ngrok-free.app/api/auth/official/register", {
+      const res = await fetch(`https://civicsync-w9yy.onrender.com${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
@@ -28,10 +31,17 @@ export default function OfficialSignup() {
       const data = await res.json();
       
       if (!res.ok) {
-        toast.error(data.error || "Registration failed.");
+        toast.error(data.error || "Authentication failed.");
       } else {
-        toast.success("Registration successful! You can now log into the mobile app.");
-        setFormData({ name: "", email: "", agency_id: "", password: "" });
+        toast.success(isLogin ? "Welcome back, Officer!" : "Registration successful!");
+        if (isLogin) {
+          // Store user ID in localStorage just in case we need it
+          localStorage.setItem("officialId", data.user.id);
+          setLocation("/official-dashboard");
+        } else {
+          setIsLogin(true); // Switch to login view after registering
+          setFormData({ name: "", email: "", agency_id: "", password: "" });
+        }
       }
     } catch (error) {
       toast.error("Network error. Make sure the backend is running.");
@@ -57,24 +67,40 @@ export default function OfficialSignup() {
             Official Portal
           </h2>
           <p className="mt-3 text-sm text-slate-500">
-            Secure registration for Nagar Nigam personnel.
+            {isLogin ? "Secure login for Nagar Nigam personnel." : "Secure registration for Nagar Nigam personnel."}
           </p>
         </div>
         
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
-            <div>
-              <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
-                Full Name
-              </label>
-              <Input 
-                required 
-                placeholder="Officer Name"
-                className="h-12 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                value={formData.name}
-                onChange={e => setFormData({...formData, name: e.target.value})}
-              />
-            </div>
+            {!isLogin && (
+              <>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+                    Full Name
+                  </label>
+                  <Input 
+                    required 
+                    placeholder="Officer Name"
+                    className="h-12 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                    value={formData.name}
+                    onChange={e => setFormData({...formData, name: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+                    Agency ID
+                  </label>
+                  <Input 
+                    required 
+                    placeholder="NN-XXXX"
+                    className="h-12 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                    value={formData.agency_id}
+                    onChange={e => setFormData({...formData, agency_id: e.target.value})}
+                  />
+                </div>
+              </>
+            )}
             
             <div>
               <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
@@ -87,19 +113,6 @@ export default function OfficialSignup() {
                 className="h-12 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
                 value={formData.email}
                 onChange={e => setFormData({...formData, email: e.target.value})}
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
-                Agency ID
-              </label>
-              <Input 
-                required 
-                placeholder="NN-XXXX"
-                className="h-12 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                value={formData.agency_id}
-                onChange={e => setFormData({...formData, agency_id: e.target.value})}
               />
             </div>
 
@@ -123,9 +136,19 @@ export default function OfficialSignup() {
             className="w-full h-12 bg-slate-900 hover:bg-slate-800 text-white font-medium rounded-lg shadow-sm transition-all"
             disabled={loading}
           >
-            {loading ? "Authenticating..." : "Request Access"}
+            {loading ? "Authenticating..." : (isLogin ? "Secure Login" : "Request Access")}
           </Button>
           
+          <div className="mt-4 text-center">
+            <button 
+              type="button" 
+              onClick={() => setIsLogin(!isLogin)}
+              className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
+            >
+              {isLogin ? "Need an account? Request access." : "Already have access? Login here."}
+            </button>
+          </div>
+
           <p className="text-center text-xs text-slate-400 mt-6 max-w-[250px] mx-auto">
             Access is strictly monitored and logged. Unauthorized attempts are prohibited.
           </p>

@@ -36,7 +36,7 @@ export default function AuthScreen({ navigation }) {
         setIsLoading(true);
         try {
             if (isLogin) {
-                const res = await axios.post('https://8c49-2401-4900-883f-b678-ddde-4fd9-f965-210f.ngrok-free.app/api/auth/civilian/login', { email, password });
+                const res = await axios.post('https://civicsync-w9yy.onrender.com/api/auth/civilian/login', { email, password });
                 login(res.data.user);
             } else {
                 if (!name || !email || !password || !aadhaar) {
@@ -49,7 +49,7 @@ export default function AuthScreen({ navigation }) {
                     setIsLoading(false);
                     return;
                 }
-                const res = await axios.post('https://8c49-2401-4900-883f-b678-ddde-4fd9-f965-210f.ngrok-free.app/api/auth/civilian/register', { 
+                const res = await axios.post('https://civicsync-w9yy.onrender.com/api/auth/civilian/register', { 
                     name, email, password, aadhaar_no: aadhaar 
                 });
                 login(res.data.user);
@@ -70,9 +70,9 @@ export default function AuthScreen({ navigation }) {
     const handleOfficialSubmit = async () => {
         setIsLoading(true);
         try {
-            const res = await axios.post('https://8c49-2401-4900-883f-b678-ddde-4fd9-f965-210f.ngrok-free.app/api/auth/official/login', { 
+            const res = await axios.post('https://civicsync-w9yy.onrender.com/api/auth/official/login', { 
                 email: officialId, 
-                password: officialPassword 
+                password: password 
             });
             login(res.data.user);
         } catch (error) {

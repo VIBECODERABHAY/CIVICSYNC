@@ -68,6 +68,7 @@ export default function Home() {
           </div>
           <div className="hidden md:flex items-center gap-6">
             <button onClick={() => navigate("/download")} className="text-xs text-muted-foreground hover:text-primary transition-smooth">Download</button>
+            <button onClick={() => navigate("/initiatives")} className="text-xs text-muted-foreground hover:text-primary transition-smooth">Initiatives</button>
             <button onClick={() => navigate("/guide")} className="text-xs text-muted-foreground hover:text-primary transition-smooth">Guide</button>
             <button onClick={() => navigate("/support")} className="text-xs text-muted-foreground hover:text-primary transition-smooth">Support</button>
             <button onClick={() => navigate("/official-portal")} className="text-xs font-semibold text-slate-800 hover:text-primary transition-smooth">Official Portal</button>

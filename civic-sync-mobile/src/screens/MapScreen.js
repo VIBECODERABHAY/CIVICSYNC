@@ -33,7 +33,7 @@ export default function MapScreen() {
 
                 // Fetch Database Pins
                 try {
-                    const res = await axios.get('https://8c49-2401-4900-883f-b678-ddde-4fd9-f965-210f.ngrok-free.app/api/reports');
+                    const res = await axios.get('https://civicsync-w9yy.onrender.com/api/reports');
                     setMarkers(res.data);
                 } catch (error) {
                     console.error(error);

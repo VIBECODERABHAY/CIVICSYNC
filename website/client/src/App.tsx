@@ -9,6 +9,8 @@ import Download from "./pages/Download";
 import Support from "./pages/Support";
 import Guide from "./pages/Guide";
 import OfficialSignup from "./pages/OfficialSignup";
+import OfficialDashboard from "./pages/OfficialDashboard";
+import Initiatives from "./pages/Initiatives";
 
 
 function Router() {
@@ -18,7 +20,9 @@ function Router() {
       <Route path="/download" component={Download} />
       <Route path="/support" component={Support} />
       <Route path="/guide" component={Guide} />
+      <Route path="/initiatives" component={Initiatives} />
       <Route path="/official-portal" component={OfficialSignup} />
+      <Route path="/official-dashboard" component={OfficialDashboard} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

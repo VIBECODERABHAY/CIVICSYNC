@@ -36,7 +36,7 @@ export default function SignupScreen({ navigation }) {
 
     setIsLoading(true);
     try {
-      const response = await axios.post('https://8c49-2401-4900-883f-b678-ddde-4fd9-f965-210f.ngrok-free.app/api/auth/civilian/register', {
+      const response = await axios.post('https://civicsync-w9yy.onrender.com/api/auth/civilian/register', {
         name,
         email,
         password,

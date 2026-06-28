@@ -10,7 +10,7 @@ export default function OfficialDashboardScreen() {
 
     const fetchReports = async () => {
         try {
-            const res = await axios.get('https://8c49-2401-4900-883f-b678-ddde-4fd9-f965-210f.ngrok-free.app/api/official/dashboard');
+            const res = await axios.get('https://civicsync-w9yy.onrender.com/api/official/dashboard');
             setData(res.data);
         } catch (error) {
             console.error(error);
@@ -33,7 +33,7 @@ export default function OfficialDashboardScreen() {
                     text: "Resolve", 
                     onPress: async () => {
                         try {
-                            await axios.post('https://8c49-2401-4900-883f-b678-ddde-4fd9-f965-210f.ngrok-free.app/api/official/resolve', { complaint_id: id });
+                            await axios.post('https://civicsync-w9yy.onrender.com/api/official/resolve', { complaint_id: id });
                             Alert.alert('Success', 'Issue marked as resolved.');
                             fetchReports();
                         } catch(e) {
@@ -98,19 +98,34 @@ export default function OfficialDashboardScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.headerArea}>
-                <Text style={styles.headerTitle}>Nagar Nigam Portal</Text>
-                <Text style={styles.headerSubtitle}>Official Command Center</Text>
+            <View style={styles.header}>
+                <View>
+                    <Text style={styles.headlineLarge}>Civic Issues</Text>
+                    <Text style={styles.bodyMedium}>Monitor and resolve reported problems.</Text>
+                </View>
+                <TouchableOpacity onPress={fetchReports} style={{padding: 8, backgroundColor: Theme.colors.surfaceCard, borderRadius: Theme.radius.full}}>
+                    <Ionicons name="refresh" size={24} color={Theme.colors.primary} />
+                </TouchableOpacity>
             </View>
 
-            {loading ? <ActivityIndicator size="large" color={Theme.colors.primary} style={{marginTop: 50}} /> : (
+            {loading ? (
+                <View style={styles.loaderContainer}>
+                    <ActivityIndicator size="large" color={Theme.colors.primary} />
+                </View>
+            ) : (
                 <FlatList
                     data={data}
+                    keyExtractor={(item) => item.id ? item.id.toString() : item._id.toString()}
                     renderItem={renderItem}
-                    keyExtractor={item => item.id.toString()}
-                    contentContainerStyle={{ paddingHorizontal: Theme.spacing.margin, paddingBottom: Theme.spacing.large }}
-                    refreshing={loading}
-                    onRefresh={fetchReports}
+                    contentContainerStyle={styles.listContent}
+                    showsVerticalScrollIndicator={false}
+                    ListEmptyComponent={
+                        <View style={{alignItems: 'center', justifyContent: 'center', marginTop: 100}}>
+                            <Ionicons name="checkmark-circle-outline" size={80} color={Theme.colors.textSecondary} />
+                            <Text style={{fontSize: 20, fontWeight: 'bold', color: Theme.colors.textPrimary, marginTop: 16}}>No Active Issues</Text>
+                            <Text style={{fontSize: 14, color: Theme.colors.textSecondary, marginTop: 8, textAlign: 'center'}}>The city is clean! No complaints have been filed by citizens yet.</Text>
+                        </View>
+                    }
                 />
             )}
         </SafeAreaView>
@@ -119,27 +134,28 @@ export default function OfficialDashboardScreen() {
 
 const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: Theme.colors.background },
-    headerArea: { padding: Theme.spacing.margin, paddingTop: 40, backgroundColor: Theme.colors.surfaceCard, marginBottom: Theme.spacing.base, borderBottomWidth: 1, borderBottomColor: Theme.colors.outlineVariant },
-    headerTitle: { fontSize: 24, fontWeight: '800', color: Theme.colors.primary },
-    headerSubtitle: { fontSize: 14, color: Theme.colors.textSecondary, marginTop: 4 },
-    headlineMedium: { fontSize: 20, fontWeight: '700', color: Theme.colors.textPrimary, marginVertical: 6, letterSpacing: -0.5 },
-    bodyMedium: { fontSize: 14, color: Theme.colors.textSecondary, lineHeight: 22 },
-    labelSmall: { fontSize: 12, fontWeight: '600', color: Theme.colors.textSecondary, textTransform: 'uppercase', letterSpacing: 0.5 },
-    card: { backgroundColor: Theme.colors.surfaceCard, borderRadius: Theme.radius.medium, padding: Theme.spacing.margin, marginBottom: Theme.spacing.medium, ...Theme.shadows.minimal },
-    cardEmergency: { borderWidth: 2, borderColor: Theme.colors.error, backgroundColor: '#fff5f5' },
-    cardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: Theme.spacing.base },
-    chip: { paddingVertical: 6, paddingHorizontal: 14, borderRadius: Theme.radius.full },
-    chipLabel: { fontSize: 12, fontWeight: '800' },
-    chipPending: { backgroundColor: Theme.colors.pendingBg },
-    textPending: { color: Theme.colors.pendingText },
-    chipProgress: { backgroundColor: Theme.colors.inProgressBg },
-    textProgress: { color: Theme.colors.inProgressText },
-    chipResolved: { backgroundColor: Theme.colors.resolvedBg },
-    textResolved: { color: Theme.colors.resolvedText },
-    metaDataRow: { marginTop: 6, flexDirection: 'row', alignItems: 'center' },
-    metaDataText: { fontSize: 13, color: Theme.colors.textSecondary, fontWeight: '600' },
-    priorityText: { fontSize: 13, color: Theme.colors.error, marginTop: 12, fontWeight: 'bold' },
-    cardFooter: { marginTop: Theme.spacing.medium, paddingTop: Theme.spacing.base, flexDirection: 'row' },
-    secondaryButton: { flexDirection: 'row', alignItems: 'center', paddingVertical: 10, paddingHorizontal: Theme.spacing.medium, backgroundColor: '#e8f5e9', borderRadius: Theme.radius.small },
-    secondaryButtonText: { color: Theme.colors.resolvedText, fontSize: 14, fontWeight: '700' }
+    header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: Theme.spacing.margin, paddingTop: 40, backgroundColor: Theme.colors.surfaceCard, ...Theme.shadows.minimal, zIndex: 10 },
+    headlineLarge: { fontSize: 28, fontWeight: '800', color: Theme.colors.primary, letterSpacing: -0.5 },
+    bodyMedium: { fontSize: 14, color: Theme.colors.textSecondary, marginTop: 4 },
+    loaderContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+    listContent: { padding: Theme.spacing.margin, paddingBottom: 40 },
+    card: { backgroundColor: Theme.colors.surfaceCard, borderRadius: Theme.radius.medium, padding: Theme.spacing.margin, marginBottom: Theme.spacing.medium, ...Theme.shadows.minimal, borderWidth: 1, borderColor: Theme.colors.outlineVariant },
+    cardEmergency: { borderColor: '#ffcdd2', backgroundColor: '#fff5f5' },
+    cardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 },
+    chip: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: 12 },
+    chipLabel: { fontSize: 11, fontWeight: '800', letterSpacing: 0.5 },
+    chipPending: { backgroundColor: '#fff3e0' },
+    textPending: { color: '#e65100' },
+    chipProgress: { backgroundColor: '#e3f2fd' },
+    textProgress: { color: '#1565c0' },
+    chipResolved: { backgroundColor: '#e8f5e9' },
+    textResolved: { color: '#2e7d32' },
+    labelSmall: { fontSize: 12, color: Theme.colors.textSecondary, fontWeight: '600' },
+    headlineMedium: { fontSize: 18, fontWeight: '800', color: Theme.colors.textPrimary, marginBottom: 8, letterSpacing: -0.3 },
+    metaDataRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 6 },
+    metaDataText: { fontSize: 13, color: Theme.colors.textSecondary, fontWeight: '500' },
+    priorityText: { fontSize: 12, fontWeight: '800', color: Theme.colors.error, marginTop: 8, paddingVertical: 6, paddingHorizontal: 8, borderRadius: Theme.radius.small, overflow: 'hidden' },
+    cardFooter: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 16, paddingTop: 16, borderTopWidth: 1, borderTopColor: Theme.colors.outlineVariant },
+    secondaryButton: { flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: '#e8f5e9', paddingVertical: 10, borderRadius: Theme.radius.small },
+    secondaryButtonText: { fontSize: 13, fontWeight: '700', color: '#2e7d32' }
 });

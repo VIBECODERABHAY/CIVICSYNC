@@ -100,7 +100,7 @@ export default function NewReportOfficial() {
 
     setIsSubmitting(true);
     try {
-      const response = await axios.post('https://8c49-2401-4900-883f-b678-ddde-4fd9-f965-210f.ngrok-free.app/api/reports/submit', {
+      const response = await axios.post('https://civicsync-w9yy.onrender.com/api/reports/submit', {
         user_id: user ? user.id : 1, // Fallback safely just in case
         title: issueType,
         description: description,

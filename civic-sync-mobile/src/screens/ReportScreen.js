@@ -56,7 +56,7 @@ export default function ReportScreen() {
 
     const submitReport = async (payload) => {
         try {
-            const response = await fetch('https://8c49-2401-4900-883f-b678-ddde-4fd9-f965-210f.ngrok-free.app/api/reports/submit', {
+            const response = await fetch('https://civicsync-w9yy.onrender.com/api/reports/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
