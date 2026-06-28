@@ -60,7 +60,7 @@ export default function Home() {
         <div className="container flex items-center justify-between h-14">
           <div className="flex items-center gap-2">
             <img 
-              src="/manus-storage/civicsync-logo_9f28ea54.png" 
+              src="/logo.png" 
               alt="CivicSync" 
               className="w-6 h-6 transition-smooth hover:scale-110 brightness-0 invert"
             />
@@ -73,13 +73,6 @@ export default function Home() {
             <button onClick={() => navigate("/support")} className="text-xs text-zinc-400 hover:text-white transition-smooth">Support</button>
             <button onClick={() => navigate("/official-portal")} className="text-xs font-semibold text-zinc-300 hover:text-white transition-smooth">Official Portal</button>
           </div>
-          <Button 
-            size="sm" 
-            onClick={() => navigate("/download")}
-            className="bg-primary hover:bg-primary/90 text-white transition-smooth hover:scale-105 active:scale-95 shadow-lg shadow-primary/20"
-          >
-            Download PRD
-          </Button>
         </div>
       </nav>
 
@@ -116,7 +109,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
               <Button 
                 size="lg" 
-                onClick={() => window.open("/CIVICSYNC.apk", "_blank")}
+                onClick={() => navigate("/download")}
                 className="bg-primary hover:bg-primary/90 text-white transition-smooth hover:scale-105 active:scale-95 shadow-lg shadow-primary/20"
               >
                 Download for Android (APK)
